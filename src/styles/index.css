@@ -1,0 +1,46 @@
+@import url('./font.css');
+@import url('./theme.css');
+@import "tailwindcss";
+body{
+    font-size: 16px;
+    font-family: 'vazir';
+    font-weight: normal;
+    direction: rtl;
+    background-color: var(--surface);
+    color: var(--text);
+    
+}
+
+.wave-box {
+  border-radius: 40% 60% 55% 45% / 60% 40% 60% 40%;
+  animation: waveMotion 6s ease-in-out infinite;
+}
+
+
+@keyframes waveMotion {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    border-radius: 40% 60% 55% 45% / 60% 40% 60% 40%;
+  }
+  25% {
+    transform: translateY(-4px) rotate(-0.5deg);
+    border-radius: 42% 58% 57% 43% / 62% 38% 62% 38%;
+  }
+  50% {
+    transform: translateY(0) rotate(0.3deg);
+    border-radius: 40% 60% 55% 45% / 60% 40% 60% 40%;
+  }
+  75% {
+    transform: translateY(3px) rotate(0.5deg);
+    border-radius: 38% 62% 53% 47% / 58% 42% 58% 42%;
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+    border-radius: 40% 60% 55% 45% / 60% 40% 60% 40%;
+  }
+}
+.swiper-pagination-bullet-active {
+  background: var(--primary) !important;
+  width: 20px;
+  border-radius: 10px;
+}

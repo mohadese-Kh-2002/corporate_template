@@ -1,0 +1,241 @@
+{
+"seo": {
+    "siteTitle": "CORVEX | قالب شرکتی مدرن و حرفه‌ای",
+    "description": "قالب شرکتی حرفه‌ای برای طراحی سایت و توسعه وب با React و Tailwind. مناسب برای شرکت‌های طراحی سایت، استارتاپ‌ها و کسب‌وکارهای دیجیتال",
+    "keywords": ["قالب شرکتی", "طراحی سایت", "قالب راستچین", "React", "Tailwind", "قالب React", "قالب شرکتی React"],
+    "author": "CORVEX",
+    "ogImage": "/images/logo/logo.png",
+    "siteUri":"corvex.ir"
+  },
+  
+  "siteInfo":{
+    "logo":"/images/logo/logo.png",
+    "title":"CORVEX"
+  },
+  
+  "pages": {
+    "home": {
+      "title": "خانه | CORVEX",
+      "description": "طراحی و توسعه راهکارهای دیجیتال با React و Tailwind",
+      "hero": {
+        "title": "ما CORVEX هستیم",
+        "highlight": "CORVEX",
+        "subtitle": "طراحی و توسعه راهکارهای دیجیتال",
+        "backgroundImage": "/images/hero.png",
+        "primaryButton": {
+          "text": "شروع همکاری",
+          "link": "/contact-us"
+        },
+        "secondaryButton": {
+          "text": "نمونه کارها",
+          "link": "/portfolio"
+        }
+      },  "stats": [
+        { "value": "+120", "label": "پروژه موفق" },
+        { "value": "+85", "label": "مشتری راضی" },
+        { "value": "5+", "label": "سال تجربه" },
+        { "value": "24/7", "label": "پشتیبانی" }
+      ]
+    },
+
+    "services": {
+      "title": "خدمات | CORVEX",
+      "description": "خدمات طراحی سایت، توسعه وب اپلیکیشن، UI/UX و سئو",
+      "hero": {
+        "title": "خدمات ما",
+        "subtitle": "راهکارهای حرفه‌ای برای رشد کسب‌وکار شما",
+        "backgroundImage": "/images/hero.png"
+      }
+    },
+
+    "portfolio": {
+      "title": "نمونه کارها | CORVEX",
+      "description": "نمونه کارهای طراحی و توسعه وب",
+      "hero": {
+        "title": "نمونه کارها",
+        "subtitle": "پروژه‌هایی که با کیفیت اجرا شده‌اند",
+        "backgroundImage": "/images/hero.png"
+      }
+    },
+
+    "about": {
+      "title": "درباره ما | CORVEX",
+      "description": "آشنایی با تیم و ارزش‌های CORVEX",
+      "hero": {
+        "title": "درباره ما",
+        "subtitle": "آشنایی با تیم و ارزش‌های ما",
+        "backgroundImage": "/images/hero.png"
+      }
+    },
+
+    "contact": {
+       "title": "تماس با ما | CORVEX",
+      "description": "ارتباط با تیم CORVEX برای همکاری و مشاوره",
+      "hero": {
+        "title": "تماس با ما",
+        "subtitle": "آماده‌ایم درباره پروژه شما صحبت کنیم",
+        "backgroundImage": "/images/hero.png"
+      }
+    }
+  },
+"services": [
+  {
+    "id": 1,
+    "icon": "FaCode",
+    "imgUri":"",
+    "title": "توسعه وب اپلیکیشن",
+    "description": "طراحی و توسعه وب اپلیکیشن‌های سریع و مقیاس‌پذیر"
+  },
+  {
+    "id": 2,
+    "icon": "FaPalette",
+    "imgUri":"/images/hero.png",
+    "title": "طراحی UI/UX",
+    "description": "طراحی تجربه کاربری مدرن و کاربرمحور"
+  },
+  {
+    "id": 3,
+    "icon": "TbPalette",
+    "imgUri":"",
+    "title": "طراحی UI/UX",
+    "description": "طراحی تجربه کاربری برای افزایش تعامل و تبدیل کاربران."
+  },
+  {
+    "id": 4,
+    "icon": "TbTrendingUp",
+    "imgUri":"",
+    "title": "سئو و بهینه‌سازی",
+    "description": "افزایش دیده‌شدن سایت شما در نتایج جستجو."
+  },
+  {
+    "id": 5,
+    "icon": "TbSettings",
+    "imgUri":"",
+    "title": "پشتیبانی و نگهداری",
+    "description": "پشتیبانی فنی و به‌روزرسانی مداوم پروژه‌ها."
+  }
+],
+
+
+"portfolio": [
+  {
+    "id": 1,
+    "title": "فروشگاه اینترنتی",
+    "category": "Web App",
+    "images": ["/images/hero.png", "/images/hero.png", "/images/hero.png"],
+    "description": "طراحی و توسعه یک فروشگاه اینترنتی مدرن با تمرکز بر تجربه کاربری و سرعت بالا.",
+    
+    "challenge": "کارفرما با نرخ تبدیل پایین و سرعت لود ضعیف مواجه بود و نیاز به یک پلتفرم مقیاس‌پذیر داشت.",
+    
+    "solution": "ما با استفاده از معماری مدرن و بهینه‌سازی سمت سرور، تجربه کاربری سریع و روان طراحی کردیم و فرآیند خرید را ساده‌سازی نمودیم.",
+    
+    "technologies": ["Next.js", "Tailwind", "Node.js"],
+    
+    "result": [
+  {
+    "label": "افزایش پایداری سیستم",
+    "value": "+70%"
+  },
+  {
+    "label": "بهبود امنیت",
+    "value": "+80%"
+  },
+  {
+    "label": "افزایش سرعت پردازش سفارش",
+    "value": "+45%"
+  }
+]
+  },
+  {
+    "id": 2,
+    "title": "داشبورد مدیریت",
+    "category": "UI/UX",
+    "images": ["/images/hero.png", "/images/hero.png", "/images/hero.png"],
+    "description": "طراحی رابط کاربری حرفه‌ای برای سیستم مدیریت داخلی شرکت.",
+    
+    "challenge": "پیچیدگی داده‌ها و نبود ساختار بصری منظم باعث سردرگمی کاربران شده بود.",
+    
+    "solution": "با طراحی یک سیستم طراحی (Design System) منسجم و استفاده از نمودارهای تعاملی، تجربه کاربری ساده و کاربردی ایجاد کردیم.",
+    
+    "technologies": ["Next.js", "Tailwind", "Node.js"],
+    
+    "result": [
+  {
+    "label": "افزایش پایداری سیستم",
+    "value": "+70%"
+  },
+  {
+    "label": "بهبود امنیت",
+    "value": "+80%"
+  },
+  {
+    "label": "افزایش سرعت پردازش سفارش",
+    "value": "+45%"
+  }
+]
+  },
+  {
+    "id": 3,
+    "title": "وب اپلیکیشن فروشگاهی",
+    "category": "توسعه وب",
+    "images": ["/images/hero.png", "/images/hero.png", "/images/hero.png"],
+    "description": "توسعه یک وب اپلیکیشن فروشگاهی با قابلیت مدیریت سفارش و پرداخت آنلاین.",
+    
+    "challenge": "سیستم قبلی فاقد مقیاس‌پذیری و امنیت کافی بود.",
+    
+    "solution": "پیاده‌سازی معماری ماژولار با امنیت بالا و بهینه‌سازی API ها برای عملکرد سریع‌تر.",
+    
+    "technologies": ["Next.js", "Tailwind", "Node.js"],
+    
+    "result": [
+  {
+    "label": "افزایش پایداری سیستم",
+    "value": "+70%"
+  },
+  {
+    "label": "بهبود امنیت",
+    "value": "+80%"
+  },
+  {
+    "label": "افزایش سرعت پردازش سفارش",
+    "value": "+45%"
+  }
+]
+  }
+],
+
+
+  "about": {
+    "values": [
+      "طراحی اختصاصی",
+      "کدنویسی تمیز",
+      "پشتیبانی حرفه‌ای",
+      "تمرکز بر تجربه کاربری"
+    ],
+    "skills": ["React", "Next.js", "Tailwind", "Node.js"],
+    "ourStory":"CORVEX با هدف خلق تجربه‌های دیجیتال مؤثر شکل گرفت. ما به طراحی ساده، کدنویسی تمیز و تمرکز روی نتیجه باور داریم."
+  },
+
+  "contact": {
+    "email": "info@corvex.ir",
+    "phone": "09121234567",
+    "address": "تهران، خیابان ولیعصر",
+    "socials": {
+      "instagram": "#",
+      "linkedin": "#",
+      "telegram": "#",
+      "whatsapp":"#"
+    },
+    "formUri":"https://formspree.io/"
+  },
+
+  "footer": {
+    "copyright": "© 2026 CORVEX. تمامی حقوق محفوظ است.",
+    "links": [
+      { "title": "خانه", "url": "/" },
+      { "title": "خدمات", "url": "/services" },
+      { "title": "نمونه کارها", "url": "/portfolio" }
+    ],
+    "description":"ما ارائه‌دهنده راهکارهای حرفه‌ای برای معرفی، رشد و حضور قدرتمند کسب‌وکارها هستیم."
+  }
+}
