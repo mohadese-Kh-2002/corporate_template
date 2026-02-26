@@ -9,6 +9,7 @@ const Portfolio=lazy(()=>import('./pages/Portfolio'))
 const Contact=lazy(()=>import('./pages/Contact'))
 const NotFound=lazy(()=>import('./pages/NotFound'))
 const PortfolioDetails=lazy(()=>import('./pages/PortfolioDetails'))
+const ServiceDetails=lazy(()=>import('./pages/ServiceDetails'))
 import PageLoader from './components/PageLoader'
 function App() {
   return (
@@ -16,18 +17,17 @@ function App() {
       <Routes>
       <Route element={<MainLayout />}>
         <Route index element={<Home />} />
-        <Route path="about-us" element={<About />} />
-        <Route path="services" element={<Services />} />
+        <Route path="about_us" element={<About />} />
+        <Route path="services"  >
+        <Route index element={<Services />}/>
+        <Route path=":id" element={<ServiceDetails />}/>
+        </Route>
         <Route path="portfolio"  >
         <Route index element={<Portfolio />}/>
         <Route path=":id" element={<PortfolioDetails />}/>
         </Route>
-        <Route path="contact-us" element={<Contact />} />
+        <Route path="contact_us" element={<Contact />} />
       </Route>
-
-    
-
-     
       <Route path="*" element={<NotFound />} />
     </Routes>
    </Suspense>

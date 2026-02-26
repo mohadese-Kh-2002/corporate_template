@@ -1,20 +1,64 @@
-import { BiCategory } from 'react-icons/bi'
-import Button from '../Button'
+import Button from "../Button";
 
-const PortfolioCard = ({images,title,category,id}) => {
+const PortfolioCard = ({
+  images = [],
+  title,
+  category,
+  id,
+  description = "",
+}) => {
+
+  const imageUrl = images && images.length > 0 ? images[0] : "/images/hero.png";
+
   return (
-    <div className='mx-auto hover:scale-105 transition-all items-center duration-300 rounded-xl p-5 flex  flex-col gap-3 bg-(--surface) shadow-[0_10px_20px_-15px_var(--primary)] max-w-75 w-full aspect-square'>
-      <div className='w-full rounded-lg border border-(--primary) overflow-hidden'>
-        <img src={images[0]} alt='portfolio' />
-      </div>
-      <h6 className='font-bold text-[18px]'>{title}</h6>
-      <div className='flex items-center gap-1.5 text-[14px]'>
-        <BiCategory/>
-        <span>{category}</span>
-      </div>
-      <Button to={`/portfolio/${id}`} variant='outline'>دیدن جزییات</Button>
-    </div>
-  )
-}
+    <div className="group relative mx-auto w-full max-w-sm">
+      <div className="relative bg-(--surface) rounded-2xl border border-(--border) overflow-hidden hover:border-(--primary) hover:shadow-2xl hover:shadow-(--primary)/10 transition-all duration-500">
+        <div
+          className={`absolute top-3 right-3 z-10 px-3 py-1 bg-linear-to-r from-(--primary) to-(--secondary) rounded-full text-white text-xs font-medium shadow-lg`}
+        >
+          {category}
+        </div>
 
-export default PortfolioCard
+        <div className="relative overflow-hidden aspect-4/3">
+          <img
+            src={imageUrl}
+            alt={title}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          />
+
+          <div className="absolute inset-0 bg-linear-to-t from-black/70  to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+            <Button
+              to={`/portfolio/${id}`}
+              variant="primary"
+              className="bg-white text-black! hover:bg-white/90 shadow-lg"
+            >
+              مشاهده پروژه
+            </Button>
+          </div>
+
+          {images.length > 1 && (
+            <div className="absolute bottom-2 left-2 bg-black/50 backdrop-blur-sm text-white text-[12px] px-2 py-1 rounded-full">
+              {(images.length).toLocaleString('fa-IR')}+ تصویر
+            </div>
+          )}
+        </div>
+
+        <div className="p-5">
+          <h3 className="text-[18px] font-bold mb-2 group-hover:text-(--primary) transition-colors line-clamp-1">
+            {title}
+          </h3>
+
+          {description && (
+            <p className="text-[14px] text-(--text-muted) mb-4 line-clamp-2">
+              {description}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PortfolioCard;

@@ -1,4 +1,4 @@
-import  { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "./Container";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -16,15 +16,21 @@ const menu = [
   { text: "خانه", link: "/", icon: <HiOutlineHome /> },
   { text: "خدمات", link: "/services", icon: <HiOutlineWrenchScrewdriver /> },
   { text: "نمونه کار", link: "/portfolio", icon: <HiOutlineBriefcase /> },
-  { text: "درباره ما", link: "/about-us", icon: <HiOutlineUsers /> },
-  { text: "تماس با ما", link: "/contact-us", icon: <HiOutlinePhone /> },
+  { text: "درباره ما", link: "/about_us", icon: <HiOutlineUsers /> },
+  { text: "تماس با ما", link: "/contact_us", icon: <HiOutlinePhone /> },
 ];
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const siteInfo = siteData.siteInfo;
+  const [isSticky, setIsSticky] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
       if (window.scrollY > 20) {
         setIsOpen(false);
       }
@@ -45,7 +51,9 @@ const Header = () => {
   }, [isOpen]);
 
   return (
-    <header className="relative z-50 w-full border-b border-(--primary) bg-(--surface) py-3.75 backdrop-blur-[6px]">
+    <header
+      className={`${isSticky ? "fixed top-0 left-0 right-0 " : "relative  top-auto left-auto right-auto"} z-50 w-full border-b border-(--primary) bg-(--surface) py-3.75 backdrop-blur-[6px] transition-all duration-500`}
+    >
       <Container>
         <nav className="flex sm:grid items-center justify-between grid-cols-none sm:grid-cols-12 w-full">
           <Link
@@ -67,22 +75,22 @@ const Header = () => {
           />
           <ul className="hidden md:flex items-center gap-4 lg:gap-6 font-medium col-span-10">
             {menu.map((m) => (
-              <li className="relative group">
+              <li className="relative group" key={m.link}>
                 <Link
-                   to={m.link}
-  className={`relative z-10 flex items-center gap-2 px-3 py-2 ${
-    m.link === "/" 
-      ? location.pathname === "/" 
-        ? "text-[25px] text-(--primary)" 
-        : "text-[16px] text-(--text)"
-      : location.pathname.startsWith(m.link) 
-        ? "text-[25px] text-(--primary)" 
-        : "text-[16px] text-(--text)"
-  }`}
+                  to={m.link}
+                  className={`relative z-10 flex items-center gap-2 px-3 py-2 ${
+                    m.link === "/"
+                      ? location.pathname === "/"
+                        ? "text-[25px] text-(--primary)"
+                        : "text-[16px] text-(--text)"
+                      : location.pathname.startsWith(m.link)
+                        ? "text-[25px] text-(--primary)"
+                        : "text-[16px] text-(--text)"
+                  }`}
                 >
                   {m.icon}
                   <span
-                    className={`${m.link==='/'?location.pathname=='/' ? "hidden" : "inline-flex":location.pathname.startsWith(m.link)?'hidden':'inline-flex'}`}
+                    className={`${m.link === "/" ? (location.pathname == "/" ? "hidden" : "inline-flex") : location.pathname.startsWith(m.link) ? "hidden" : "inline-flex"}`}
                   >
                     {m.text}
                   </span>
@@ -105,7 +113,7 @@ const Header = () => {
         </nav>
       </Container>
       <div
-        className={`fixed right-0 top-0 z-1001 bottom-0 h-screen bg-(--primary)/50 backdrop-blur-lg  transition-all duration-300 pt-2.5 px-2.5 ${isOpen ? "w-[80vw] sm:w-[50vw] translate-x-0" : "w-0 translate-x-[80vw] sm:translate-x-[50vw]"}`}
+        className={`fixed right-0 top-0 z-1001 bottom-0 h-screen bg-linear-to-t from-(--primary)/50 to-(--secondary)/50 backdrop-blur-lg  transition-all duration-300 pt-2.5 px-2.5 ${isOpen ? "w-[80vw] sm:w-[50vw] translate-x-0" : "w-0 translate-x-[80vw] sm:translate-x-[50vw]"}`}
       >
         <FaWindowClose
           onClick={() => setIsOpen(false)}
@@ -126,22 +134,22 @@ const Header = () => {
         </div>
         <ul className="flex flex-col ">
           {menu.map((m) => (
-            <li className="relative group border-b-(--text) border-b last:border-b-0">
+            <li key={m.link} className="relative group border-b-white border-b last:border-b-0">
               <Link
                 to={m.link}
                 className={`relative z-10 flex items-center gap-2 px-3 py-2 ${
-    m.link === "/" 
-      ? location.pathname === "/" 
-        ? "text-[25px] text-(--primary)" 
-        : "text-[16px] text-(--text)"
-      : location.pathname.startsWith(m.link) 
-        ? "text-[25px] text-(--primary)" 
-        : "text-[16px] text-(--text)"
-  }`}
+                  m.link === "/"
+                    ? location.pathname === "/"
+                      ? "text-[25px] text-(--primary)"
+                      : "text-[16px] text-white"
+                    : location.pathname.startsWith(m.link)
+                      ? "text-[25px] text-(--primary)"
+                      : "text-[16px] text-white"
+                }`}
               >
                 {m.icon}
                 <span
-                  className={`${m.link==='/'?location.pathname=='/' ? "hidden" : "inline-flex":location.pathname.startsWith(m.link)?'hidden':'inline-flex'} group-hover:pr-1.5 transition duration-500`}
+                  className={`${m.link === "/" ? (location.pathname == "/" ? "hidden" : "inline-flex") : location.pathname.startsWith(m.link) ? "hidden" : "inline-flex"} group-hover:pr-1.5 transition duration-500`}
                 >
                   {m.text}
                 </span>

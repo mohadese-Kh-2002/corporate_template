@@ -1,16 +1,14 @@
-import  { useState } from "react"; 
+import { useState } from "react";
 import Container from "../components/Container";
 import Hero from "../components/Hero";
 import Button from "../components/Button";
-import { MdOutlineAlternateEmail } from "react-icons/md";
+import { MdOutlineAlternateEmail, MdOutlineContentCopy } from "react-icons/md";
 import { HiPhone } from "react-icons/hi2";
-import { IoLocationOutline } from "react-icons/io5";
-import {
-  FaInstagram,
-  FaLinkedinIn,
-  FaTelegramPlane,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { IoLocationOutline, IoTimeOutline } from "react-icons/io5";
+import { FaInstagram, FaLinkedinIn, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
+import { FiSend, FiCheckCircle } from "react-icons/fi";
+import { BiMessageDetail } from "react-icons/bi";
+import { TbClock } from "react-icons/tb";
 import siteData from "../data/site.json";
 import TextHighlighter from "../components/Highlight";
 import { useForm } from 'react-hook-form';
@@ -18,12 +16,12 @@ import SEO from "../components/SEO";
 
 const Contact = () => {
   const contact = siteData.contact;
-  const contactHero = siteData.pages.contact.hero;
-  
+  const contactHero = siteData.pages.contact_us.hero;
   
   const [submitError, setSubmitError] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState(""); 
+  const [modalType, setModalType] = useState("");
+  const [copiedField, setCopiedField] = useState("");
   
   const { 
     register, 
@@ -39,7 +37,6 @@ const Contact = () => {
   });
 
   const onSubmit = async (data) => {
-  
     setSubmitError("");
     
     try {
@@ -51,8 +48,8 @@ const Contact = () => {
         },
         body: JSON.stringify({
           ...data,
-          _subject: "تماس جدید از سایت CORVEX", 
-          _replyto: data.email 
+          _subject: "تماس جدید از سایت CORVEX",
+          _replyto: data.email
         })
       });
       
@@ -62,12 +59,10 @@ const Contact = () => {
         throw new Error(result.error || "خطا در ارسال");
       }
       
-    
       reset();
       setModalType("success");
       setShowModal(true);
       
-     
       setTimeout(() => {
         setShowModal(false);
         setModalType("");
@@ -86,255 +81,343 @@ const Contact = () => {
     }
   };
 
-  return (
-<>   
-<SEO
-        title={siteData.pages.contact.title}
-        description={siteData.pages.contact.description}
-        url="/contact-us"
-      />
- <div className="py-8">
-      <Container>
-        <Hero
-          title={
-            <TextHighlighter text={contactHero.title} highlight={"CORVEX"} />
-          }
-          description={
-            <TextHighlighter text={contactHero.subtitle} highlight={"CORVEX"} />
-          }
-        />
-        <div className="inline-flex border border-(--primary) items-center gap-2 mt-8 bg-(--surface) px-5 py-2 rounded-[36px]">
-          <HiPhone color="var(--primary)" />
-          <span>پاسخگویی حداکثر تا ۲۴ ساعت کاری</span>
-        </div>
-        
+  const copyToClipboard = (text, field) => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(""), 2000);
+  };
 
-        {submitError && !showModal && (
-          <div className="mt-4 p-3 bg-red-500/20 border border-red-500 rounded-lg text-center">
-            <p className="text-red-700">{submitError}</p>
+  return (
+    <>
+      <SEO
+        title={siteData.pages.contact_us.title}
+        description={siteData.pages.contact_us.description}
+        url="/contact_us"
+      />
+      
+      <div className="py-8">
+        <Container>
+         
+          <Hero title={contactHero.title} description={<TextHighlighter text={contactHero.subtitle} highlight={"صحبت کنیم"}/>}/>
+   
+          <div className="flex justify-center my-8 ">
+            <div className="inline-flex items-center gap-3 bg-(--surface) border border-(--primary) px-6 py-3 rounded-full shadow-lg">
+              <div className="w-8 h-8 bg-(--primary)/10 rounded-full flex items-center justify-center">
+                <TbClock className="text-(--primary)" />
+              </div>
+              <span className="font-medium">پاسخگویی حداکثر تا ۲۴ ساعت کاری</span>
+            </div>
+          </div>
+
+       
+          {submitError && !showModal && (
+            <div className="max-w-2xl mx-auto mb-6">
+              <div className="p-4 bg-red-500/10 border border-red-500 rounded-2xl text-center">
+                <p className="text-red-500">{submitError}</p>
+              </div>
+            </div>
+          )}
+
+        
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+            <div className="lg:col-span-2">
+              <div className="bg-(--surface) border border-(--border) rounded-[36px] p-8 hover:border-(--primary) transition-all duration-300">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-linear-to-r from-(--primary) to-(--secondary) rounded-2xl flex items-center justify-center text-white">
+                    <BiMessageDetail className="text-[20px]" />
+                  </div>
+                  <div>
+                    <h2 className="text-[20px] font-bold">ارسال پیام</h2>
+                    <p className="text-[14px] text-(--text-muted)">ما همیشه خوشحال می‌شویم از شما بشنویم</p>
+                  </div>
+                </div>
+
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+             
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="flex items-center gap-1 text-[14px] font-medium">
+                      <span>نام و نام خانوادگی</span>
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      {...register("name", { 
+                        required: "نام الزامی است",
+                        minLength: {
+                          value: 2,
+                          message: "نام باید حداقل ۲ حرف باشد"
+                        }
+                      })}
+                      placeholder="مثال: علی مرادی"
+                      className={`w-full px-4 py-3 bg-(--bg)/50 border rounded-xl outline-none transition-all
+                        ${errors.name 
+                          ? 'border-red-500 focus:border-red-500' 
+                          : 'border-(--border) focus:border-(--primary) focus:ring-2 focus:ring-(--primary)/20'
+                        }`}
+                      disabled={isSubmitting}
+                    />
+                    {errors.name && (
+                      <p className="text-red-500 text-[14px] mt-1">{errors.name.message}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="flex items-center gap-1 text-[14px] font-medium">
+                      <span>آدرس ایمیل</span>
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      {...register("email", { 
+                        required: "ایمیل الزامی است",
+                        pattern: {
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                          message: "ایمیل معتبر وارد کنید"
+                        }
+                      })}
+                      placeholder="مثال: info@corvex.ir"
+                      className={`w-full px-4 py-3 bg-(--bg)/50 border rounded-xl outline-none transition-all
+                        ${errors.email 
+                          ? 'border-red-500 focus:border-red-500' 
+                          : 'border-(--border) focus:border-(--primary) focus:ring-2 focus:ring-(--primary)/20'
+                        }`}
+                      disabled={isSubmitting}
+                    />
+                    {errors.email && (
+                      <p className="text-red-500 text-[14px] mt-1">{errors.email.message}</p>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="flex items-center gap-1 text-[14px] font-medium">
+                      <span>پیام شما</span>
+                      <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                      id="message"
+                      rows="5"
+                      {...register("message", { 
+                        required: "پیام الزامی است",
+                        minLength: {
+                          value: 10,
+                          message: "پیام باید حداقل ۱۰ حرف باشد"
+                        },
+                        maxLength: {
+                          value: 500,
+                          message: "پیام نمی‌تواند بیشتر از ۵۰۰ حرف باشد"
+                        }
+                      })}
+                      placeholder="پیام خود را بنویسید..."
+                      className={`w-full px-4 py-3 bg-(--bg)/50 border rounded-xl outline-none resize-none transition-all
+                        ${errors.message 
+                          ? 'border-red-500 focus:border-red-500' 
+                          : 'border-(--border) focus:border-(--primary) focus:ring-2 focus:ring-(--primary)/20'
+                        }`}
+                      disabled={isSubmitting}
+                    />
+                    {errors.message && (
+                      <p className="text-red-500 text-[14px] mt-1">{errors.message.message}</p>
+                    )}
+                  </div>
+
+                
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`w-full py-4 text-lg font-medium relative overflow-hidden group
+                      ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+                    variant="primary"
+                    size="lg"
+                  >
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        در حال ارسال...
+                      </span>
+                    ) : (
+                      <span className="flex items-center justify-center gap-2">
+                        ارسال پیام
+                        <FiSend className="group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    )}
+                  </Button>
+                </form>
+              </div>
+            </div>
+
+       
+            <div className="space-y-6">
+          
+              <div className="bg-(--surface) border border-(--border) rounded-3xl p-6 hover:border-(--primary) transition-all">
+                <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                  <span className="w-1 h-6 bg-(--primary) rounded-full"></span>
+                  اطلاعات تماس
+                </h3>
+                
+                <div className="space-y-4">
+             
+                  <div className="flex items-center justify-between p-3 bg-(--primary)/5 rounded-xl hover:bg-(--primary)/10 transition-all group">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-(--primary)/10 rounded-lg flex items-center justify-center">
+                        <HiPhone className="text-(--primary)" />
+                      </div>
+                      <div>
+                        <div className="text-[12px] text-(--text-muted)">تلفن</div>
+                        <div className="font-medium">{contact.phone}</div>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => copyToClipboard(contact.phone, 'phone')}
+                      className="p-2 hover:bg-(--primary)/10 rounded-lg transition"
+                    >
+                      <MdOutlineContentCopy className={`text-(--text-muted) hover:text-(--primary) ${copiedField === 'phone' ? 'text-green-500' : ''}`} />
+                    </button>
+                  </div>
+
+                  <div className="flex items-center justify-between p-3 bg-(--primary)/5 rounded-xl hover:bg-(--primary)/10 transition-all group">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-(--primary)/10 rounded-lg flex items-center justify-center">
+                        <MdOutlineAlternateEmail className="text-(--primary)" />
+                      </div>
+                      <div>
+                        <div className="text-[12px] text-(--text-muted)">ایمیل</div>
+                        <div className="font-medium">{contact.email}</div>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => copyToClipboard(contact.email, 'email')}
+                      className="p-2 hover:bg-(--primary)/10 rounded-lg transition"
+                    >
+                      <MdOutlineContentCopy className={`text-(--text-muted) hover:text-(--primary) ${copiedField === 'email' ? 'text-green-500' : ''}`} />
+                    </button>
+                  </div>
+
+                
+                  <div className="p-3 bg-(--primary)/5 rounded-xl">
+                    <div className="flex items-start gap-3">
+                      <div className="w-8 h-8 bg-(--primary)/10 rounded-lg flex items-center justify-center shrink-0">
+                        <IoLocationOutline className="text-(--primary)" />
+                      </div>
+                      <div>
+                        <div className="text-[12px] text-(--text-muted) mb-1">آدرس</div>
+                        <div className="text-[14px]">{contact.address}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+           
+              <div className="bg-(--surface) border border-(--border) rounded-3xl p-6 hover:border-(--primary) transition-all">
+                <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                  <span className="w-1 h-6 bg-(--primary) rounded-full"></span>
+                  ما را دنبال کنید
+                </h3>
+                
+                <div className="grid grid-cols-2 gap-3">
+                  <a
+                    href={contact.socials.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 p-3 bg-linear-to-r from-purple-500/10 to-pink-500/10 rounded-xl hover:from-purple-500 hover:to-pink-500 hover:text-white transition-all group"
+                  >
+                    <FaInstagram className="text-xl text-purple-500 group-hover:text-white" />
+                    <span className="text-[14px] font-medium">اینستاگرام</span>
+                  </a>
+                  
+                  <a
+                    href={contact.socials.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 p-3 bg-linear-to-r from-blue-500/10 to-cyan-500/10 rounded-xl hover:from-blue-500 hover:to-cyan-500 hover:text-white transition-all group"
+                  >
+                    <FaLinkedinIn className="text-xl text-blue-500 group-hover:text-white" />
+                    <span className="text-[14px] font-medium">لینکدین</span>
+                  </a>
+                  
+                  <a
+                    href={contact.socials.telegram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 p-3 bg-linear-to-r from-blue-400/10 to-indigo-500/10 rounded-xl hover:from-blue-400 hover:to-indigo-500 hover:text-white transition-all group"
+                  >
+                    <FaTelegramPlane className="text-xl text-blue-400 group-hover:text-white" />
+                    <span className="text-[14px] font-medium">تلگرام</span>
+                  </a>
+                  
+                  <a
+                    href={contact.socials.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 p-3 bg-linear-to-r from-green-500/10 to-emerald-500/10 rounded-xl hover:from-green-500 hover:to-emerald-500 hover:text-white transition-all group"
+                  >
+                    <FaWhatsapp className="text-xl text-green-500 group-hover:text-white" />
+                    <span className="text-[14px] font-medium">واتساپ</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="bg-(--surface) border border-(--border) rounded-3xl p-6 hover:border-(--primary) transition-all">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-(--primary)/10 rounded-xl flex items-center justify-center">
+                    <IoTimeOutline className="text-xl text-(--primary)" />
+                  </div>
+                  <div>
+                    <div className="text-[14px] text-(--text-muted)">ساعات کاری</div>
+                    <div className="font-medium">شنبه تا پنجشنبه - ۹ تا ۱۸</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+
+       
+        {showModal && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className={`bg-(--surface) rounded-3xl p-8 max-w-md w-full text-center border-2
+              ${modalType === 'success' ? 'border-green-500' : 'border-red-500'}`}
+            >
+              <div className={`w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-4
+                ${modalType === 'success' ? 'bg-green-500/20' : 'bg-red-500/20'}`}
+              >
+                {modalType === 'success' ? (
+                  <FiCheckCircle className="text-4xl text-green-500" />
+                ) : (
+                  <div className="text-4xl text-red-500">!</div>
+                )}
+              </div>
+              
+              <h3 className={`text-[20px] font-bold mb-2
+                ${modalType === 'success' ? 'text-green-500' : 'text-red-500'}`}
+              >
+                {modalType === 'success' ? 'پیام شما ارسال شد' : 'خطا در ارسال'}
+              </h3>
+              
+              <p className="text-(--text-muted) mb-6">
+                {modalType === 'success' 
+                  ? 'از ارتباط با شما خوشحالیم. در اسرع وقت پاسخگو خواهیم بود.'
+                  : submitError || 'مشکلی پیش آمد. لطفاً دوباره تلاش کنید.'}
+              </p>
+              
+              <button
+                onClick={() => setShowModal(false)}
+                className={`px-6 py-2 rounded-full text-white font-medium
+                  ${modalType === 'success' ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600'}`}
+              >
+                بستن
+              </button>
+            </div>
           </div>
         )}
-        
-        <section className="grid grid-cols-1 md:grid-cols-4 pt-8 gap-5">
-          <div className="p-5 col-span-2 lg:col-span-3 border border-(--primary) bg-(--surface) rounded-[36px]">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-             
-              <div className="flex flex-col gap-2">
-                <label htmlFor="name">اسمتو بنویس: </label>
-                <input
-                  type="text"
-                  id="name"
-                  {...register("name", { 
-                    required: "نام الزامی است",
-                    minLength: {
-                      value: 2,
-                      message: "نام باید حداقل ۲ حرف باشد"
-                    }
-                  })}
-                  className={`outline-none rounded-lg py-1.5 px-1 bg-(--bg)/80 
-                    border border-white/10
-                    focus:border-(--primary)
-                    focus:ring-2 focus:ring-(--primary)/30
-                    transition-all
-                    disabled:opacity-50 disabled:cursor-not-allowed
-                    ${errors.name ? 'border-red-500' : ''}`}
-                  disabled={isSubmitting}
-                />
-                {errors.name && (
-                  <span className="text-red-500 text-sm mt-1">
-                    {errors.name.message}
-                  </span>
-                )}
-              </div>
-              
-            
-              <div className="flex flex-col gap-2">
-                <label htmlFor="email">ایمیلتو بنویس: </label>
-                <input
-                  type="email"
-                  id="email"
-                  {...register("email", { 
-                    required: "ایمیل الزامی است",
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: "ایمیل معتبر وارد کنید"
-                    }
-                  })}
-                  className={`outline-none rounded-lg py-1.5 px-1 bg-(--bg)/80 
-                    border border-white/10
-                    focus:border-(--primary)
-                    focus:ring-2 focus:ring-(--primary)/30
-                    transition-all
-                    disabled:opacity-50 disabled:cursor-not-allowed
-                    ${errors.email ? 'border-red-500' : ''}`}
-                  disabled={isSubmitting}
-                />
-                {errors.email && (
-                  <span className="text-red-500 text-sm mt-1">
-                    {errors.email.message}
-                  </span>
-                )}
-              </div>
-              
-           
-              <div className="flex flex-col gap-2">
-                <label htmlFor="message">پیامتو بنویس: </label>
-                <textarea
-                  id="message"
-                  rows="5"
-                  {...register("message", { 
-                    required: "پیام الزامی است",
-                    minLength: {
-                      value: 10,
-                      message: "پیام باید حداقل ۱۰ حرف باشد"
-                    },
-                    maxLength: {
-                      value: 500,
-                      message: "پیام نمی‌تواند بیشتر از ۵۰۰ حرف باشد"
-                    }
-                  })}
-                  className={`outline-none resize-y min-h-38 rounded-lg p-2 bg-(--bg)/80  
-                    border border-white/10
-                    focus:border-(--primary)
-                    focus:ring-2 focus:ring-(--primary)/30
-                    transition-all
-                    disabled:opacity-50 disabled:cursor-not-allowed
-                    ${errors.message ? 'border-red-500' : ''}`}
-                  disabled={isSubmitting}
-                />
-                {errors.message && (
-                  <span className="text-red-500 text-sm mt-1">
-                    {errors.message.message}
-                  </span>
-                )}
-              </div>
-              
-          
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className={`shadow-[0_5px_10px_-5px_(--primary)]
-                  hover:scale-[1.02] transition
-                  ${isSubmitting && 'opacity-50 cursor-not-allowed' }`}
-                variant="primary"
-                size="lg"
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center gap-2">
-                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                    در حال ارسال...
-                  </span>
-                ) : 'بفرستش'}
-              </Button>
-            </form>
-          </div>
-          
- 
-          <div className="space-y-6 p-5 border border-(--primary) bg-(--surface) rounded-[36px] col-span-2 lg:col-span-1">
-            <div>
-              <ul className="flex flex-col gap-3 text-[14px] items-center">
-                <li className="flex flex-col items-center gap-1.5">
-                  <div className="flex items-center gap-1">
-                    <HiPhone className="text-(--primary)" />
-                    <span>تلفن:</span>
-                  </div>
-                  <span>{contact.phone}</span>
-                </li>
-                <li className="flex flex-col items-center gap-1.5">
-                  <div className="flex items-center gap-1">
-                    <MdOutlineAlternateEmail className="text-(--primary)" />
-                    <span>ایمیل:</span>
-                  </div>
-                  <span>{contact.email}</span>
-                </li>
-                <li className="flex flex-col items-center gap-1.5">
-                  <div className="flex items-center gap-1">
-                    <IoLocationOutline className="text-(--primary)" />
-                    <span>آدرس:</span>
-                  </div>
-                  <p className="text-center">{contact.address}</p>
-                </li>
-              </ul>
-            </div>
-
-            <div className="flex items-center gap-3 justify-center mt-7">
-              <a
-                href={contact.socials.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-(--bg) hover:bg-(--primary) hover:text-white transition"
-              >
-                <FaInstagram />
-              </a>
-              <a
-                href={contact.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-(--bg) hover:bg-(--primary) hover:text-white transition"
-              >
-                <FaLinkedinIn />
-              </a>
-              <a
-                href={contact.socials.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-(--bg) hover:bg-(--primary) hover:text-white transition"
-              >
-                <FaTelegramPlane />
-              </a>
-              <a
-                href={contact.socials.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-(--bg) hover:bg-(--primary) hover:text-white transition"
-              >
-                <FaWhatsapp />
-              </a>
-            </div>
-          </div>
-        </section>
-      </Container>
-
- 
-      {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-          <div className={`p-8 rounded-[36px] border text-center bg-(--surface) max-w-md mx-4
-            ${modalType === 'success' ? 'border-green-500' : 'border-red-500'}`}
-          >
-            {modalType === 'success' ? (
-              <>
-                <div className="text-5xl mb-4">✅</div>
-                <h2 className="text-[25px] font-bold text-green-500 mb-4">
-                  با تشکر از شما!
-                </h2>
-                <p className="opacity-80">
-                  پیام شما با موفقیت ارسال شد. در اولین فرصت پاسخگو خواهیم بود.
-                </p>
-              </>
-            ) : (
-              <>
-                <div className="text-5xl mb-4">❌</div>
-                <h2 className="text-[25px] font-bold text-red-500 mb-4">
-                  خطا در ارسال
-                </h2>
-                <p className="opacity-80">
-                  {submitError || "مشکلی پیش اومد. دوباره تلاش کنید."}
-                </p>
-                <button
-                  onClick={() => setShowModal(false)}
-                  className="mt-6 px-6 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition"
-                >
-                  بستن
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-    </div></>
+      </div>
+    </>
   );
 };
 

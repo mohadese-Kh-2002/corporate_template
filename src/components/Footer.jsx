@@ -62,7 +62,7 @@ const Footer = () => {
           <div className=" text-center sm:text-right">
             <p className="mb-3 text-[18px]">دسترسی سریع</p>
             <ul className="text-[14px] flex flex-col gap-2">
-              {footer.links.map(l=><li className="sm:hover:-translate-x-1 transition-all duration-300 hover:text-(--primary) hover:font-bold">
+              {footer.links.map(l=><li key={l.title} className="sm:hover:-translate-x-1 transition-all duration-300 hover:text-(--primary) hover:font-bold">
                 <Link to={l.url}>{l.title}</Link>
               </li>)}
              
