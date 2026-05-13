@@ -45,7 +45,7 @@ const ServiceCard = ({
       titleClass: "text-lg font-bold mb-2",
     },
   };
- const base = import.meta.env.BASE_URL;
+ 
   const style = variants[variant] || variants.default;
 
   return (
@@ -61,7 +61,7 @@ const ServiceCard = ({
           </div>
         ) : (
           <div
-            className={`w-12.5 aspect-square rounded-full  bg-[url('${base.slice(0,base.length-1)}${imgUri}')] bg-center bg-cover bg-no-repeat`}
+            className={`w-12.5 aspect-square rounded-full  bg-[url('${imgUri}')] bg-center bg-cover bg-no-repeat`}
           />
         )}
 

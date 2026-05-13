@@ -24,6 +24,7 @@ const Services = () => {
   const serviceHero = siteData.pages.services.hero;
   const aboutValue = siteData.about.values;
   const startupProcess=siteData.startupProcess
+  const base = import.meta.env.BASE_URL;
   return (
     <>
       <SEO
@@ -63,7 +64,7 @@ const Services = () => {
                     icon={IconComponent}
                     variant={variant}
                     showButton={true}
-                    imgUri={service.imgUri}
+                    imgUri={`${base.slice(0,base.length-1)}${service.imgUri}`}
                   />
                 );
               })}
