@@ -8,7 +8,7 @@ const Hero = () => {
     <section className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
       <div className="wave-box overflow-hidden border border-(--primary)">
         <img
-          src={`${base.slice(0, base.length - 1)}images/hero.png`}
+          src={`${base.slice(0, base.length - 1)}/images/hero.png`}
           alt="hero"
           className="w-full h-full object-cover"
         />

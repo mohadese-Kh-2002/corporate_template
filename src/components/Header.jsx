@@ -49,7 +49,7 @@ const Header = () => {
       document.body.style.overflow = "unset";
     };
   }, [isOpen]);
-
+const base = import.meta.env.BASE_URL;
   return (
     <header
       className={`${isSticky ? "fixed top-0 left-0 right-0 " : "relative  top-auto left-auto right-auto"} z-50 w-full border-b border-(--primary) bg-(--surface) py-3.75 backdrop-blur-[6px] transition-all duration-500`}
@@ -61,7 +61,7 @@ const Header = () => {
             className="cursor-pointer sm:col-span-1 flex flex-col justify-center items-center gap-1"
           >
             <img
-              src={siteInfo.logo}
+              src={`${base.slice(0,base.length-1)}${siteInfo.logo}`}
               className="w-10 aspect-square rounded-full "
               loading="lazy"
             />

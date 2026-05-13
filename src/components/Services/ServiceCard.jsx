@@ -12,6 +12,7 @@ const ServiceCard = ({
   className = "",
   ...props
 }) => {
+  console.log('mmmmm',imgUri);
   const variants = {
     default: {
       container:
