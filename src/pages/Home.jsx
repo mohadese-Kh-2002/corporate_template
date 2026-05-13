@@ -27,6 +27,7 @@ const Home = () => {
   const portfolio = siteData.portfolio;
   const aboutData = siteData.about;
   const concatData=siteData.contact
+   const base = import.meta.env.BASE_URL;
   const stats = siteData.pages.home.stats;
   const [counts, setCounts] = useState(stats.map(() => 0));
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -218,7 +219,7 @@ const Home = () => {
     {portfolio[0] && (
       <div className="relative h-100 rounded-3xl overflow-hidden group">
         <img 
-          src={portfolio[0].images[0]} 
+          src={`${base.slice(0,base.length-1)}${portfolio[0].images[0]}`} 
           alt={portfolio[0].title}
           className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
         />
@@ -242,7 +243,7 @@ const Home = () => {
       {portfolio.slice(1, 5).map((p) => (
         <div key={p.id} className="relative h-47.5 rounded-2xl overflow-hidden group">
           <img 
-            src={p.images[0]} 
+            src={`${base.slice(0,base.length-1)}${p.images[0]}`} 
             alt={p.title}
             className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
           />

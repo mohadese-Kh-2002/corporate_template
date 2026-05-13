@@ -7,8 +7,8 @@ import { useLocation } from "react-router-dom"
 const Hero = ({title,description}) => {
   const {pathname}=useLocation()
   const Hero=SiteData.pages
-  const imageUri=Hero[pathname.split('/')[1]]?.hero.backgroundImage ?? '/images/hero.png'
-
+  const base = import.meta.env.BASE_URL;
+  const imageUri=`${base.slice(0,base.length-1)}${Hero[pathname.split('/')[1]]?.hero.backgroundImage}` && `${base.slice(0,base.length-1)}images/hero.png`
   return (
           <section
           className={`

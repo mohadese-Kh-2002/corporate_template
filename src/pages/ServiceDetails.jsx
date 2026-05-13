@@ -46,7 +46,7 @@ const ServiceDetails = () => {
     siteData.services.find((s) => s.id === parseInt(id)) ||
     siteData.services[0];
   const IconComponent = iconsMap[service?.icon] || FaRocket;
-
+  const base = import.meta.env.BASE_URL;
   if (!service) {
     return (
       <Container>
@@ -122,7 +122,7 @@ const ServiceDetails = () => {
                 <div className=" bg-transparent rounded-[36px] p-12 text-center border border-(--border)">
                   {service.imgUri ? (
                     <img
-                      src={service.imgUri}
+                      src={`${base.slice(0, base.length - 1)}${service.imgUri}`}
                       alt={service.title}
                       className="w-full h-64 object-cover rounded-2xl mb-6"
                     />
@@ -202,14 +202,14 @@ const ServiceDetails = () => {
               <div className="absolute -top-10 -left-10 w-40 h-40 bg-(--primary)/25 rounded-full blur-3xl"></div>
               <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-(--primary)/20 rounded-full blur-3xl"></div>
               <div className=" bg-(--surface) border border-(--border) rounded-3xl p-8">
-               <div className="flex items-center gap-2 justify-center mb-6">
-                 <div className="w-10 h-10 bg-linear-to-r from-(--primary) to-(--secondary) rounded-xl flex items-center justify-center text-white">
-                  <FiCpu className="text-[20px]" />
+                <div className="flex items-center gap-2 justify-center mb-6">
+                  <div className="w-10 h-10 bg-linear-to-r from-(--primary) to-(--secondary) rounded-xl flex items-center justify-center text-white">
+                    <FiCpu className="text-[20px]" />
+                  </div>
+                  <h3 className="text-[20px] font-bold ">
+                    تکنولوژی‌های استفاده شده
+                  </h3>
                 </div>
-                <h3 className="text-[20px] font-bold ">
-                  تکنولوژی‌های استفاده شده
-                </h3>
-               </div>
                 <div className="flex flex-wrap gap-3 justify-center">
                   {service.technologies.map((tech, index) => (
                     <span
