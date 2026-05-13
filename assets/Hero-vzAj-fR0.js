@@ -1,4 +1,4 @@
-import{u as n,s as i,j as e}from"./index-xHjeHA69.js";import{B as t}from"./SEO-DE1Z7kVE.js";const d=({title:r,description:a})=>{const{pathname:l}=n(),o=i.pages,s="/corporate_template/",c=`${s.slice(0,s.length-1)}${o[l.split("/")[1]]?.hero.backgroundImage}`||`${s.slice(0,s.length-1)}/images/hero.png`;return e.jsxs("section",{className:`
+import{u as n,s as i,j as e}from"./index-lsqpD747.js";import{B as t}from"./SEO-CVrWu6Bv.js";const d=({title:r,description:a})=>{const{pathname:l}=n(),o=i.pages,s="/corporate_template/",c=`${s.slice(0,s.length-1)}${o[l.split("/")[1]]?.hero.backgroundImage}`||`${s.slice(0,s.length-1)}/images/hero.png`;return e.jsxs("section",{className:`
             wave-box
     relative w-full overflow-hidden
     

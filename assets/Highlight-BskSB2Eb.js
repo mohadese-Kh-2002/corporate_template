@@ -1,1 +1,0 @@
-import{j as s}from"./index-xHjeHA69.js";const a=({text:t,highlight:r})=>{const o=new RegExp(`(${r})`,"gi");return s.jsx(s.Fragment,{children:t.split(o).map((e,n)=>e.toLowerCase()===r.toLowerCase()?s.jsx("span",{className:"text-(--primary) font-bold",children:e},n):e)})};export{a as T};
